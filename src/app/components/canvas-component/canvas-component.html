@@ -1,0 +1,112 @@
+ <div class="canvas-container" #canvasContainer (click)="onCanvasClick($event)">
+      <div class="canvas-grid"></div>
+      <svg class="canvas-svg" #canvasSvg>
+        <!-- Grid pattern -->
+        <defs>
+          <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+          </pattern>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+                  refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6" />
+          </marker>
+          <!-- Crow’s Foot markers -->
+          <!-- One ( | ) -->
+          <marker id="crow-one" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
+            <path d="M12 0 L12 12" stroke="#3b82f6" stroke-width="2"/>
+          </marker>
+
+          <!-- Many ( > ) -->
+          <marker id="crow-many" markerWidth="20" markerHeight="20" refX="10" refY="10" orient="auto">
+            <path d="M0,0 L10,10 L0,20" stroke="#3b82f6" stroke-width="2" fill="none"/>
+            <path d="M10 0 L10 20" stroke="#3b82f6" stroke-width="2"/>
+          </marker>
+
+          <!-- Zero ( o ) -->
+          <marker id="crow-zero" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
+            <circle cx="6" cy="6" r="4" stroke="#3b82f6" stroke-width="2" fill="white"/>
+          </marker>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" opacity="1"/>
+        
+        <!-- Relationship lines -->
+        <g *ngFor="let relationship of relationships">
+          <ng-container *ngIf="getEntityById(relationship.fromEntityId) as fromEntity">
+            <ng-container *ngIf="getEntityById(relationship.toEntityId) as toEntity">
+              <line  
+                [attr.x1]="fromEntity.position.x + fromEntity.size.width"
+                [attr.y1]="fromEntity.position.y + fromEntity.size.height/2"
+                [attr.x2]="toEntity.position.x "
+                [attr.y2]="toEntity.position.y + toEntity.size.height / 2"
+                stroke="#3b82f6"
+                stroke-width="2"
+                marker-start="url(#one)"
+                marker-end="url(#many)"
+                [attr.marker-start]="getMarkerStart(relationship.type)"
+                [attr.marker-end]="getMarkerEnd(relationship.type)"
+                [class.selected]="relationship.isSelected">
+              </line>
+              
+              <!-- From cardinality label -->
+              <text 
+                [attr.x]="fromEntity.position.x + fromEntity.size.width  + 10"
+                [attr.y]="fromEntity.position.y + fromEntity.size.height  - 10"
+                fill="#374151"
+                font-size="12"
+                class="cardinality-label"
+                font-weight="bold">
+                {{ relationship.fromCardinality }}
+              </text>
+              
+              <!-- To cardinality label -->
+              <text 
+                [attr.x]="toEntity.position.x - toEntity.size.width / 2 + 10"
+                [attr.y]="toEntity.position.y + toEntity.size.height / 2 - 10"
+                fill="#374151"
+                font-size="12"
+                class="cardinality-label"
+                font-weight="bold">
+                {{ relationship.toCardinality }}
+              </text>
+              
+              <!-- Relationship name -->
+              <text 
+                [attr.x]="(fromEntity.position.x + fromEntity.size.width / 2 + toEntity.position.x + toEntity.size.width / 2) / 2"
+                [attr.y]="(fromEntity.position.y + fromEntity.size.height / 2 + toEntity.position.y + toEntity.size.height / 2) / 2 - 5"
+                fill="#6b7280"
+                font-size="11"
+                text-anchor="middle">
+                {{ relationship.name }}
+              </text>
+            </ng-container>
+          </ng-container>
+        </g>
+      </svg>
+      
+      <!-- Entities -->
+      <div class="entity" 
+           *ngFor="let entity of entities"
+           [style.left.px]="entity.position.x"
+           [style.top.px]="entity.position.y"
+           [style.width.px]="entity.size.width"
+           [class.selected]="entity.isSelected"
+           [class.weak-entity]="entity.color === '#f59e0b'"
+           [class.relationship-source]="relationshipMode.isActive && relationshipMode.fromEntityId === entity.id"
+           [class.relationship-target]="relationshipMode.isActive && relationshipMode.fromEntityId && relationshipMode.fromEntityId !== entity.id"
+           (click)="onEntityClick(entity, $event)"
+           (mousedown)="onEntityMouseDown(entity, $event)">
+        
+        <div class="entity-header">
+          <h4>{{ entity.name }}</h4>
+        </div>
+        
+        <div class="entity-attributes">
+          <div class="attribute" *ngFor="let attr of entity.attributes">
+            <i class="fas fa-key" *ngIf="attr.isPrimaryKey"></i>
+            <i class="fas fa-link" *ngIf="attr.isForeignKey && !attr.isPrimaryKey"></i>
+            <span class="attr-name">{{ attr.name }}</span>
+            <span class="attr-type">{{ attr.type }}</span>
+          </div>
+        </div>
+      </div>
+    </div>

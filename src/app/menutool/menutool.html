@@ -1,0 +1,60 @@
+<mat-toolbar color="primary">
+  <div class="container">
+    <div class="row">
+        <div class="col-auto me-auto">
+             <button matIconButton 
+              aria-label="File"
+              matTooltip="create a new file"
+              (click)="onNewElement(1)">
+              <mat-icon>note_add</mat-icon>
+            </button>
+            <button matIconButton 
+                    aria-label=" Existing File"
+                    matTooltip="open an existing file">
+              <mat-icon>insert_drive_file</mat-icon>
+            </button>
+            <button matIconButton  
+                    aria-label="Folder"
+                    matTooltip="create a new folder"
+                    (click)="onNewElement(2)">
+              <mat-icon>folder</mat-icon>
+            </button>
+            <button matIconButton 
+                    aria-label="Sticky Note"
+                    matTooltip="add a new sticky note">
+              <mat-icon>sticky_note_2</mat-icon>
+            </button>
+            <button matIconButton 
+                    aria-label="Entity"
+                    matTooltip="add a new entity">
+              <mat-icon>crop_square</mat-icon>
+            </button>
+            <button matIconButton 
+                    aria-label="Weak Entity"
+                    matTooltip="add a new weak entity">
+              <mat-icon>backup_table</mat-icon>
+            </button>
+            <button matIconButton 
+                    aria-label="connection"
+                    matTooltip="add a new connection">
+              <mat-icon>linear_scale</mat-icon>
+            </button>
+        </div>
+        <div class="col-auto">
+          <button matIconButton [matMenuTriggerFor]="userMenu" aria-label="User">
+            <mat-icon>person</mat-icon>
+          </button>
+          <mat-menu #userMenu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>account_circle</mat-icon>
+              <span>My Profile</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>logout</mat-icon>
+              <span>Sign out</span>
+            </button>
+          </mat-menu>
+        </div>
+    </div>
+  </div>
+</mat-toolbar>

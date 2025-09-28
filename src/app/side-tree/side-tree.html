@@ -1,0 +1,19 @@
+<mat-tree #tree [dataSource]="dataSource" [childrenAccessor]="treeControl">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding (click)="onNodeSelect(node)">
+    <button matIconButton>
+      <mat-icon>{{node.icon}}</mat-icon>
+    </button>
+    {{node.name}}
+  </mat-tree-node>
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" 
+                        matTreeNodePadding
+                        matTreeNodeToggle
+                        [cdkTreeNodeTypeaheadLabel]="node.name"
+                        (click)="onNodeSelect(node)">
+    <button matIconButton  matTreeNodeToggle
+            [attr.aria-label]="node.name" >
+      <mat-icon>{{node.icon}}</mat-icon>
+    </button>
+      {{node.name}}
+  </mat-tree-node>
+</mat-tree>

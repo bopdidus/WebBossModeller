@@ -1,0 +1,80 @@
+.toolbox {
+      width: 250px;
+      height: 100%;
+      overflow-y: auto;
+    }
+    
+    .toolbox-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .toolbox-header h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary-text);
+    }
+    
+    .toolbox-content {
+      padding: 16px;
+    }
+    
+    .tool-category {
+      margin-bottom: 24px;
+    }
+    
+    .tool-category:last-child {
+      margin-bottom: 0;
+    }
+    
+    .tool-category h4 {
+      margin: 0 0 12px 0;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--secondary-text);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .tool-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    
+    .tool-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: var(--secondary-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      color: var(--primary-text);
+    }
+    
+    .tool-item:hover {
+      background: var(--accent-bg);
+      border-color: var(--accent-text);
+    }
+    
+    .tool-item.active {
+      background: var(--accent-text);
+      color: white;
+      border-color: var(--accent-text);
+    }
+    
+    .tool-item i {
+      font-size: 16px;
+      width: 16px;
+      text-align: center;
+    }
+    
+    .tool-item span {
+      flex: 1;
+      font-weight: 500;
+    }

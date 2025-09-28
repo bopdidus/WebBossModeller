@@ -1,0 +1,129 @@
+.canvas-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: var(--canvas-bg);
+      overflow: hidden;
+      cursor: default;
+    }
+    
+    .canvas-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .entity {
+      position: absolute;
+      background: white;
+      border: 2px solid #3b82f6;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      cursor: move;
+      z-index: 10;
+      min-height: 120px;
+      transition: all 0.2s ease;
+    }
+    
+    .entity[style*="rgb(245, 158, 11)"] {
+      border: 2px dashed #f59e0b;
+      background: #fef3c7;
+    }
+    
+    .entity.weak-entity {
+      border: 2px dashed #f59e0b;
+      background: #fef3c7;
+    }
+    
+    .entity[style*="rgb(245, 158, 11)"] .entity-header,
+    .entity.weak-entity .entity-header {
+      background: #f59e0b;
+    }
+    
+    .entity:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
+    
+    .entity.selected {
+      border-color: var(--accent-text);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+    
+    .entity.relationship-source {
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+    }
+    
+    .entity.relationship-target {
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3);
+      cursor: crosshair;
+    }
+    
+    .entity-header {
+      padding: 12px 16px;
+      background: #3b82f6;
+      color: white;
+      border-radius: 6px 6px 0 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .entity-header h4 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+    
+    .entity-attributes {
+      padding: 8px;
+    }
+    
+    .attribute {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #374151;
+      transition: background-color 0.2s ease;
+    }
+    
+    .attribute:hover {
+      background: #f3f4f6;
+    }
+    
+    .attribute i {
+      font-size: 10px;
+      width: 12px;
+      color: #6b7280;
+    }
+    
+    .attribute i.fa-key {
+      color: #f59e0b;
+    }
+    
+    .attribute i.fa-link {
+      color: #3b82f6;
+    }
+    
+    .attr-name {
+      flex: 1;
+      font-weight: 500;
+    }
+    
+    .attr-type {
+      color: #6b7280;
+      font-size: 11px;
+    }
+
+    .cardinality-label {
+  pointer-events: none; /* évite que le texte gêne les clics */
+  z-index: 30; /* pour forcer les labels au-dessus */
+}

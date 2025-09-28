@@ -1,0 +1,67 @@
+<div class="toolbar">
+      <div class="toolbar-section">
+        <div class="logo">
+          <i class="fas fa-project-diagram"></i>
+          <span>Web Boss Modeller</span>
+        </div>
+      </div>
+      
+      <div class="toolbar-section toolbar-center">
+        <div class="toolbar-group">
+          <button class="btn btn-secondary" (click)="newDiagram()" title="New Diagram">
+            <i class="fas fa-file"></i>
+            New
+          </button>
+          <button class="btn btn-secondary" (click)="openDiagram()" title="Open Diagram">
+            <i class="fas fa-folder-open"></i>
+            Open
+          </button>
+          <button class="btn btn-secondary" (click)="saveDiagram()" title="Save Diagram">
+            <i class="fas fa-save"></i>
+            Save
+          </button>
+        </div>
+        
+        <div class="toolbar-divider"></div>
+        
+        <div class="toolbar-group">
+          <button class="btn btn-secondary" (click)="undo()" title="Undo">
+            <i class="fas fa-undo"></i>
+          </button>
+          <button class="btn btn-secondary" (click)="redo()" title="Redo">
+            <i class="fas fa-redo"></i>
+          </button>
+        </div>
+        
+        <div class="toolbar-divider"></div>
+        
+        <div class="toolbar-group">
+          <button class="btn btn-secondary" (click)="zoomIn()" title="Zoom In">
+            <i class="fas fa-search-plus"></i>
+          </button>
+          <button class="btn btn-secondary" (click)="zoomOut()" title="Zoom Out">
+            <i class="fas fa-search-minus"></i>
+          </button>
+          <button class="btn btn-secondary" (click)="fitToScreen()" title="Fit to Screen">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="toolbar-section">
+        <div class="toolbar-group">
+          <button class="btn btn-secondary" (click)="exportToPNG()" title="Export as PNG">
+            <i class="fas fa-image"></i>
+            PNG
+          </button>
+          <button class="btn btn-secondary" (click)="exportToSQL()" title="Export as SQL">
+            <i class="fas fa-database"></i>
+            SQL
+          </button>
+          <button class="btn btn-primary" (click)="share()" title="Share">
+            <i class="fas fa-share"></i>
+            Share
+          </button>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,54 @@
+<div class="toolbox panel">
+      <div class="toolbox-header">
+        <h3>Tools</h3>
+      </div>
+      
+      <div class="toolbox-content">
+        <div class="tool-category">
+          <h4>Entities</h4>
+          <div class="tool-grid">
+            @for (tool of entityTools; track $index) {
+              <div class="tool-item" 
+                 [class.active]="selectedTool === tool.id"
+                 (click)="selectTool(tool.id)"
+                 [title]="tool.description">
+                <i [class]="tool.icon"></i>
+                <span>{{ tool.name }}</span>
+              </div>
+            }
+          </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="tool-category">
+          <h4>Relationships</h4>
+          <div class="tool-grid">
+            @for (tool of relationshipTools; track $index) {
+              <div class="tool-item"
+                 [class.active]="selectedTool === tool.id"
+                 (click)="selectTool(tool.id)"
+                 [title]="tool.description">
+                <i [class]="tool.icon"></i>
+                <span>{{ tool.name }}</span>
+              </div>
+            }
+          </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="tool-category">
+          <h4>Navigation</h4>
+          <div class="tool-grid">
+            <div class="tool-item"
+                 [class.active]="selectedTool === 'select'"
+                 (click)="selectTool('select')"
+                 title="Select and move elements">
+              <i class="fas fa-mouse-pointer"></i>
+              <span>Select</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
