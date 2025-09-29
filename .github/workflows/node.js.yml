@@ -28,7 +28,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm run build -- --configuration production --base-href "/${{ github.event.repository.name }}/"
+    - run: npm run build -- --configuration production"
     - run: npm test
-    - name: Deploy to GitHub Pages
-      run: npm deploy --base-href "/${{ github.event.repository.name }}/"
