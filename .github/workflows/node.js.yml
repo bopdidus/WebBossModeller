@@ -31,4 +31,4 @@ jobs:
     - run: npm run build -- --configuration production --base-href "/${{ github.event.repository.name }}/"
     - run: npm test
     - name: Deploy to GitHub Pages
-      run: npm angular-cli-ghpages --dir=dist/$(node -p "require('./angular.json').defaultProject")
+      run: npm deploy --base-href "/${{ github.event.repository.name }}/"
