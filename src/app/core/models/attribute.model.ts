@@ -5,5 +5,6 @@ export interface Attribute {
   isPrimaryKey: boolean;
   isForeignKey: boolean;
   isNullable: boolean;
+  isUnique: boolean;
   defaultValue?: string;
 }

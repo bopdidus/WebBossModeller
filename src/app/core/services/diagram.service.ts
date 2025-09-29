@@ -54,6 +54,7 @@ export class DiagramService {
           name: 'id',
           type: 'int',
           isPrimaryKey: true,
+          isUnique:false,
           isForeignKey: false,
           isNullable: false
         }
@@ -154,6 +155,7 @@ export class DiagramService {
       name: 'attribute',
       type: 'varchar',
       isPrimaryKey: false,
+      isUnique: false,
       isForeignKey: false,
       isNullable: true
     };
@@ -252,10 +254,14 @@ export class DiagramService {
       ...entity,
       isSelected: false
     }));
-
+    const updatedRelationships = currentDiagram.relationships.map(relationship => ({
+    ...relationship,
+    isSelected: false
+  }));
     this.updateDiagram({
       ...currentDiagram,
-      entities: updatedEntities
+      entities: updatedEntities,
+      relationships : updatedRelationships
     });
 
     this.selectedEntitySubject.next(null);

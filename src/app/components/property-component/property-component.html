@@ -3,175 +3,189 @@
         <h3>Properties</h3>
       </div>
       
-      <div class="properties-content" *ngIf="selectedEntity; else noSelection">
-        <div class="form-group">
-          <label class="form-label">Entity Name</label>
-          <input 
-            type="text" 
-            class="form-input" 
-            [(ngModel)]="selectedEntity.name"
-            (blur)="updateEntity()">
-        </div>
+      @if(selectedEntity)
+      {
+        <div class="properties-content" >
+          <label class="form-label">Delete Entity</label>
+          <button class="btn btn-danger btn-sm" (click)="deleteEntity(selectedEntity.id)">
+                    <i class="fas fa-trash"></i>
+          </button>
+          <div class="divider"></div>
+          <div class="form-group">
+            <label class="form-label">Entity Name</label>
+            <input 
+              type="text" 
+              class="form-input" 
+              [(ngModel)]="selectedEntity.name"
+              (blur)="updateEntity()">
+          </div>
         
-        <div class="form-group">
-          <label class="form-label">Color</label>
-          <input 
-            type="color" 
-            class="form-input color-input" 
-            [(ngModel)]="selectedEntity.color"
-            (change)="updateEntity()">
-        </div>
-        
-        <div class="divider"></div>
-        
-        <div class="attributes-section">
-          <div class="attributes-header">
-            <h4>Attributes</h4>
-            <button class="btn btn-secondary btn-sm" (click)="addAttribute()">
-              <i class="fas fa-plus"></i>
-              Add
-            </button>
+          
+          <div class="form-group">
+            <label class="form-label">Color</label>
+            <input 
+              type="color" 
+              class="form-input color-input" 
+              [(ngModel)]="selectedEntity.color"
+              (change)="updateEntity()">
           </div>
           
-          <div class="attributes-list">
-            <div class="attribute-item" *ngFor="let attr of selectedEntity.attributes; trackBy: trackByAttrId">
-              <div class="form-group">
-                <label class="form-label">Name</label>
-                <input 
-                  type="text" 
-                  class="form-input" 
-                  [(ngModel)]="attr.name"
-                  (blur)="updateEntity()">
-              </div>
-              
-              <div class="form-group">
-                <label class="form-label">Type</label>
-                <select class="form-input" [(ngModel)]="attr.type" (change)="updateEntity()">
-                  <option value="int">Integer</option>
-                  <option value="varchar">VARCHAR</option>
-                  <option value="text">Text</option>
-                  <option value="date">Date</option>
-                  <option value="datetime">DateTime</option>
-                  <option value="boolean">Boolean</option>
-                  <option value="decimal">Decimal</option>
-                </select>
-              </div>
-              
-              <div class="checkbox-group">
-                <label class="checkbox-label">
+          <div class="divider"></div>
+          
+          <div class="attributes-section">
+            <div class="attributes-header">
+              <h4>Attributes</h4>
+              <button class="btn btn-secondary btn-sm" (click)="addAttribute()">
+                <i class="fas fa-plus"></i>
+                Add
+              </button>
+            </div>
+            
+            <div class="attributes-list">
+              <div class="attribute-item" *ngFor="let attr of selectedEntity.attributes; trackBy: trackByAttrId">
+                <div class="form-group">
+                  <label class="form-label">Name</label>
                   <input 
-                    type="checkbox" 
-                    [(ngModel)]="attr.isPrimaryKey"
-                    (change)="updateEntity()">
-                  <span>Primary Key</span>
-                </label>
+                    type="text" 
+                    class="form-input" 
+                    [(ngModel)]="attr.name"
+                    (blur)="updateEntity()">
+                </div>
                 
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="attr.isForeignKey"
-                    (change)="updateEntity()">
-                  <span>Foreign Key</span>
-                </label>
+                <div class="form-group">
+                  <label class="form-label">Type</label>
+                  <select class="form-input" [(ngModel)]="attr.type" (change)="updateEntity()">
+                    <option value="int">Integer</option>
+                    <option value="varchar">VARCHAR</option>
+                    <option value="text">Text</option>
+                    <option value="date">Date</option>
+                    <option value="datetime">DateTime</option>
+                    <option value="boolean">Boolean</option>
+                    <option value="decimal">Decimal</option>
+                  </select>
+                </div>
                 
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="attr.isNullable"
-                    (change)="updateEntity()">
-                  <span>Nullable</span>
-                </label>
+                <div class="checkbox-group">
+                  <label class="checkbox-label">
+                    <input 
+                      type="checkbox" 
+                      [(ngModel)]="attr.isPrimaryKey"
+                      (change)="updateEntity()">
+                    <span>Primary Key</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input 
+                      type="checkbox" 
+                      [(ngModel)]="attr.isUnique"
+                      (change)="updateEntity()">
+                    <span>Unique</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input 
+                      type="checkbox" 
+                      [(ngModel)]="attr.isForeignKey"
+                      (change)="updateEntity()">
+                    <span>Foreign Key</span>
+                  </label>
+                  
+                  <label class="checkbox-label">
+                    <input 
+                      type="checkbox" 
+                      [(ngModel)]="attr.isNullable"
+                      (change)="updateEntity()">
+                    <span>Nullable</span>
+                  </label>
+                </div>
+                
+                <div class="attribute-actions">
+                  <button class="btn btn-secondary btn-sm" (click)="deleteAttribute(attr.id)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+                
+                <div class="divider"></div>
               </div>
-              
-              <div class="attribute-actions">
-                <button class="btn btn-secondary btn-sm" (click)="deleteAttribute(attr.id)">
-                  <i class="fas fa-trash"></i>
-                </button>
-              </div>
-              
-              <div class="divider"></div>
             </div>
           </div>
-        </div>
       </div>
-      
-      <div class="properties-content" *ngIf="selectedRelationship && !selectedEntity">
-        <div class="form-group">
-          <label class="form-label">Relationship Name</label>
-          <input 
-            type="text" 
-            class="form-input" 
-            [(ngModel)]="selectedRelationship.name"
-            (blur)="updateRelationship()">
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">From Entity</label>
-          <select class="form-input" [(ngModel)]="selectedRelationship.fromEntityId" (change)="updateRelationship()">
-            <option *ngFor="let entity of availableEntities" [value]="entity.id">
-              {{ entity.name }}
-            </option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">To Entity</label>
-          <select class="form-input" [(ngModel)]="selectedRelationship.toEntityId" (change)="updateRelationship()">
-            <option *ngFor="let entity of availableEntities" [value]="entity.id">
-              {{ entity.name }}
-            </option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">Relationship Type</label>
-          <select class="form-input" [(ngModel)]="selectedRelationship.type" (change)="onRelationshipTypeChange()">
-            <option value="one-to-one">One to One</option>
-            <option value="one-to-many">One to Many</option>
-            <option value="many-to-many">Many to Many</option>
-          </select>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <div class="cardinality-section">
-          <h4>Cardinality Settings</h4>
-          
+      }@else if (selectedRelationship && !selectedEntity) {
+        <div class="properties-content" >
           <div class="form-group">
-            <label class="form-label">From Cardinality</label>
-            <select class="form-input" [(ngModel)]="selectedRelationship.fromCardinality" (change)="updateRelationship()">
-              <option value="one">One (1)</option>
-              <option value="zero-or-one">Zero or One (0..1)</option>
-              <option value="one-or-many">One or Many (1..N)</option>
-              <option value="zero-or-many">Zero or Many (0..N)</option>
+            <label class="form-label">Relationship Name</label>
+            <input 
+              type="text" 
+              class="form-input" 
+              [(ngModel)]="selectedRelationship.name"
+              (blur)="updateRelationship()">
+          </div>
+        
+          <div class="form-group">
+            <label class="form-label">From Entity</label>
+            <select class="form-input" [(ngModel)]="selectedRelationship.fromEntityId" (change)="updateRelationship()">
+              <option *ngFor="let entity of availableEntities" [value]="entity.id">
+                {{ entity.name }}
+              </option>
             </select>
           </div>
           
           <div class="form-group">
-            <label class="form-label">To Cardinality</label>
-            <select class="form-input" [(ngModel)]="selectedRelationship.toCardinality" (change)="updateRelationship()">
-              <option value="one">One (1)</option>
-              <option value="zero-or-one">Zero or One (0..1)</option>
-              <option value="one-or-many">One or Many (1..N)</option>
-              <option value="zero-or-many">Zero or Many (0..N)</option>
+            <label class="form-label">To Entity</label>
+            <select class="form-input" [(ngModel)]="selectedRelationship.toEntityId" (change)="updateRelationship()">
+              <option *ngFor="let entity of availableEntities" [value]="entity.id">
+                {{ entity.name }}
+              </option>
             </select>
           </div>
-        </div>
         
-        <div class="divider"></div>
+          <div class="form-group">
+            <label class="form-label">Relationship Type</label>
+            <select class="form-input" [(ngModel)]="selectedRelationship.type" (change)="onRelationshipTypeChange()">
+              <option value="one-to-one">One to One</option>
+              <option value="one-to-many">One to Many</option>
+              <option value="many-to-many">Many to Many</option>
+            </select>
+          </div>
         
-        <div class="relationship-actions">
-          <button class="btn btn-secondary" (click)="deleteRelationship()">
-            <i class="fas fa-trash"></i>
-            Delete Relationship
-          </button>
-        </div>
+          <div class="divider"></div>
+        
+          <div class="cardinality-section">
+            <h4>Cardinality Settings</h4>
+            
+            <div class="form-group">
+              <label class="form-label">From Cardinality</label>
+              <select class="form-input" [(ngModel)]="selectedRelationship.fromCardinality" (change)="updateRelationship()">
+                <option value="one">One (1)</option>
+                <option value="zero-or-one">Zero or One (0..1)</option>
+                <option value="one-or-many">One or Many (1..N)</option>
+                <option value="zero-or-many">Zero or Many (0..N)</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">To Cardinality</label>
+              <select class="form-input" [(ngModel)]="selectedRelationship.toCardinality" (change)="updateRelationship()">
+                <option value="one">One (1)</option>
+                <option value="zero-or-one">Zero or One (0..1)</option>
+                <option value="one-or-many">One or Many (1..N)</option>
+                <option value="zero-or-many">Zero or Many (0..N)</option>
+              </select>
+            </div>
+          </div>
+        
+          <div class="divider"></div>
+        
+          <div class="relationship-actions">
+            <button class="btn btn-secondary" (click)="deleteRelationship()">
+              <i class="fas fa-trash"></i>
+              Delete Relationship
+            </button>
+          </div>
       </div>
-      
-      <ng-template #noSelection>
+      }
+      @else {
         <div class="no-selection">
-          <i class="fas fa-mouse-pointer"></i>
-          <p>Select an entity or relationship to view its properties</p>
+            <i class="fas fa-mouse-pointer"></i>
+            <p>Select an entity or relationship to view its properties</p>
         </div>
-      </ng-template>
-    </div>
+      }
+</div>

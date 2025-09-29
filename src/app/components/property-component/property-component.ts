@@ -96,6 +96,10 @@ export class PropertyComponent implements OnInit, OnDestroy{
       this.updateEntity();
     }
   }
+  deleteEntity(entityId: string)
+  {
+    this.diagramService.deleteEntity(entityId);
+  }
 
   trackByAttrId(index: number, attr: Attribute): string {
     return attr.id;
